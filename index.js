@@ -6,13 +6,15 @@ function loadComicData() {
     fetch("https://akabab.github.io/superhero-api/api/all.json")
         .then(res => res.json())
         .then(comicData => {
-            createAlphaSeperators(comicData)
+            const characterFirstLetters = createAlpha.call(comicData)
+            createAlphaSeperators.call(characterFirstLetters)
+            createAlphaSelectors.call(characterFirstLetters)
         })
 }
 
-function createAlpha(comicArray){
+function createAlpha(){
     const characterLetters = []
-    comicArray.forEach(character =>{
+    this.forEach(character =>{
         if(!characterLetters.includes(character.name[0])){
             characterLetters.push(character.name[0])
         }
@@ -20,10 +22,9 @@ function createAlpha(comicArray){
     return characterLetters
 }
 
-function createAlphaSeperators(comicArray){
-    const lettersForSperators = createAlpha(comicArray)
+function createAlphaSeperators(){
     const heroCards = document.getElementById("hero-cards")
-    lettersForSperators.map(letter => {
+    this.map(letter => {
         const div = document.createElement("div")
         div.setAttribute("id", letter)
         const letterHeader = document.createElement("h3")
@@ -38,3 +39,11 @@ function createAlphaSeperators(comicArray){
     
 }
 
+function createAlphaSelectors(){
+    const filterDropdown = document.getElementById("alphabet-dropdown" )
+    this.map(letter =>{
+        const option = document.createElement("option")
+        option.textContent = letter
+        filterDropdown.appendChild(option)
+    })
+}
