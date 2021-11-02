@@ -1,5 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
     loadComicData()
+    document.getElementById("alphabet-dropdown").addEventListener('change', (e) => {
+        const filterValue = e.target.value
+        if (filterValue === "All") {
+            const cardDivsions = document.getElementById("hero-cards").childNodes
+            cardDivsions.forEach(section => {
+                console.log(section.setAttribute("style", "display: block"))
+            })
+        } else {
+            const cardDivsions = document.getElementById("hero-cards").childNodes
+            cardDivsions.forEach(section => {
+                if (section.id !== filterValue) {
+                    section.style.display = "none"
+                }else{
+                    section.style.display = "block"
+                }
+            })
+        }
+    })
 });
 
 function loadComicData() {
@@ -9,7 +27,6 @@ function loadComicData() {
             const characterFirstLetters = createAlpha.call(comicData)
             createAlphaSeperators.call(characterFirstLetters)
             createAlphaSelectors.call(characterFirstLetters)
-            // createCharacterCard.call(comicData)
             populateCards.call(comicData, characterFirstLetters)
         })
 }
@@ -51,10 +68,9 @@ function createAlphaSelectors() {
 }
 
 function createCharacterCard() {
-    console.log(this)
     const cardDiv = document.createElement("div")
     const upperCard = document.createElement("div")
-    
+
     const alignmentElement = document.createElement("h3")
     alignmentElement.textContent = this.biography.alignment
     upperCard.appendChild(alignmentElement)
@@ -97,7 +113,7 @@ function createCharacterCard() {
     middleCard.appendChild(characterBio)
 
     const lowerCard = document.createElement('div')
-    
+
     const powerStatsLabel = document.createElement('h4')
     powerStatsLabel.textContent = "POWERSTATS"
     lowerCard.appendChild(powerStatsLabel)
