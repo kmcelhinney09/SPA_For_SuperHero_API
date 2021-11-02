@@ -1,22 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
     loadComicData()
-    document.getElementById("alphabet-dropdown").addEventListener('change', (e) => {
+    document.getElementById("alphabet-dropdown").addEventListener('click', (e) => {
         const filterValue = e.target.value
         if (filterValue === "All") {
             const cardDivsions = document.getElementById("hero-cards").childNodes
             cardDivsions.forEach(section => {
-                console.log(section.setAttribute("style", "display: block"))
+                clearCards(document.getElementById("hero-cards"))
+                loadComicData()
+                section.setAttribute("style", "display: block")
             })
         } else {
             const cardDivsions = document.getElementById("hero-cards").childNodes
             cardDivsions.forEach(section => {
                 if (section.id !== filterValue) {
                     section.style.display = "none"
-                }else{
+                } else {
                     section.style.display = "block"
                 }
             })
         }
+    })
+
+    const form = document.querySelector(".search-character")
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const searchStatus = true
+        const searchValue = e.target.searchbar.value
+        fetch("https://akabab.github.io/superhero-api/api/all.json")
+            .then(res => res.json())
+            .then(comicData => {
+                const characterChoice = []
+                const searchChoice = comicData.map(character => {
+                    const search = new RegExp(searchValue.toLowerCase())
+                    const searchIndex = character.name.toLowerCase().search(search)
+                    if (searchIndex > -1) {
+                        characterChoice.push(character)
+                        // console.log(character)
+                    }
+                })
+                renderSearchCards.call(characterChoice)
+            })
+        form.reset()
     })
 });
 
@@ -170,4 +194,20 @@ function populateCards(alphaList) {
 
 
     })
+}
+
+function renderSearchCards() {
+    console.log(this)
+    const heroCards = document.getElementById("hero-cards")
+    clearCards(heroCards)
+    this.forEach(character => {
+        const card = createCharacterCard.call(character)
+        heroCards.appendChild(card)
+    })
+}
+
+function clearCards(parent){
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
