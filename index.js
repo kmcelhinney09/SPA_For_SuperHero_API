@@ -1,3 +1,4 @@
+let searchStatus = false
 document.addEventListener("DOMContentLoaded", () => {
     loadComicData()
     document.getElementById("alphabet-dropdown").addEventListener('click', (e) => {
@@ -20,7 +21,18 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         }
     })
-
+    const formContainer = document.getElementById("container")
+    const searchButton = document.getElementById("find-hero")
+    searchButton.addEventListener("click", () => {
+        searchStatus = !searchStatus
+        if (searchStatus) {
+            formContainer.style.display = "block"
+            searchButton.textContent = "close"
+        } else {
+            formContainer.style.display = "none"
+            searchButton.textContent = "Find"
+        }
+    })
     const form = document.querySelector(".search-character")
     form.addEventListener("submit", (e) => {
         e.preventDefault()
@@ -206,7 +218,7 @@ function renderSearchCards() {
     })
 }
 
-function clearCards(parent){
+function clearCards(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
