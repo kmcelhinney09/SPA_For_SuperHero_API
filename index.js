@@ -130,9 +130,12 @@ function createCharacterCard() {
     upperCard.appendChild(publisherElement)
 
     const characterImage = document.createElement('img')
+    const imageText = document.createElement('div')
+    imageText.className = "imageText"
     characterImage.src = this.images.md
     characterImage.setAttribute("class", "characterImage")
-    upperCard.appendChild(characterImage)
+    imageText.appendChild(characterImage)
+    upperCard.appendChild(imageText)
 
     const middleCard = document.createElement("div")
     middleCard.className = "middleCard"
@@ -179,7 +182,6 @@ function createCharacterCard() {
 
     const powerStatsLabel = document.createElement('li')
     powerStatsLabel.textContent = "POWERSTATS"
-    // lowerCard.appendChild(powerStatsLabel)
 
     const characterPowerStats = document.createElement('ul')
 
