@@ -7,6 +7,7 @@ body {
 #formContainer{
     display: "none";
 }
+
 #hero-cards{
     display: flex;
     flex-direction: column;
@@ -16,48 +17,70 @@ body {
 .cardSpace{
     display: flex;
     flex-wrap: wrap;
+
 }
 
-.characterCard {
+.alignmentGood,.alignmentBad {
+    border: 15px solid rgb(241, 235, 226);
     border-radius: 10px;
-    background-color: #6186b6;
     display: flex;
     flex-direction: column;
-    border: grey solid 1px;
     padding: 5px;
     width: 350px;
     height: auto;
     margin: 5px;
-    box-shadow: 3px 4px #036cf5
+    /* box-shadow: 3px 4px #036cf5 */
+    
 }
 
-.characterCard > *{
+.alignmentGood,.alignmentBad > *{
     display: flex;
     flex-wrap: wrap;
-    margin: 0px
+    margin: 5px;
+}
+
+.alignmentGood{
+    background: linear-gradient(to left bottom, blue,aliceblue);
+}
+
+.alignmentBad{
+    /* color: aliceblue; */
+    background: linear-gradient(to left bottom, red,rgb(37, 37, 37));
 }
 .upperCard{
-    color: white;
+    color: aliceblue;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .alignment{
+    border-radius: 10px;
     background-color: black;
-    flex: 1 1 25%;
     padding: 8px;
+    flex: 1 1 25%;
+    margin-right: 5px;
 }
 
 .publisher{
+    border-radius: 10px;
     background-color: black;
-    /* flex: 1 1 25%; */
     text-align: right;
     padding: 8px;
+    flex: 1 1 25%;
 }
-
-
+.middleCard{
+    color: aliceblue;
+    background-color: black;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.lowerCard{
+    background-color: rgba(240, 248, 255, 0.384);
+}
 .characterImage {
     justify-self: center;
     height: auto;
     width: auto;
+    border-radius: 10px;
 }

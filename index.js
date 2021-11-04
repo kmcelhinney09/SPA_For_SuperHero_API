@@ -110,7 +110,12 @@ function createAlphaSelectors() {
 
 function createCharacterCard() {
     const cardDiv = document.createElement("div")
-    cardDiv.setAttribute("class","characterCard")
+    if(this.biography.alignment === "good"){
+        cardDiv.className = "alignmentGood"
+    }else{
+        cardDiv.className = "alignmentBad"
+    }
+    // cardDiv.setAttribute("class", "characterCard")
     const upperCard = document.createElement("div")
     upperCard.className = "upperCard"
 
@@ -126,23 +131,34 @@ function createCharacterCard() {
 
     const characterImage = document.createElement('img')
     characterImage.src = this.images.md
-    characterImage.setAttribute("class","characterImage")
+    characterImage.setAttribute("class", "characterImage")
     upperCard.appendChild(characterImage)
 
     const middleCard = document.createElement("div")
+    middleCard.className = "middleCard"
 
     const characterName = document.createElement("h2")
     characterName.textContent = `${this.id} - ${this.name}`
     middleCard.appendChild(characterName)
 
-    const biographyLabel = document.createElement("h3")
-    biographyLabel.textContent = "Bio"
-    middleCard.appendChild(biographyLabel)
+    const lowerCard = document.createElement('div')
+    lowerCard.className = "lowerCard"
+
+    const sectionBioandStats = document.createElement("ul")
+    const biographyLabel = document.createElement("li")
+    biographyLabel.textContent = "Biography"
+
+    sectionBioandStats.appendChild(biographyLabel)
 
     const characterBio = document.createElement('ul')
+
     const characterFullName = document.createElement('li')
     characterFullName.textContent = `Full Name: ${this.biography.fullName}`
     characterBio.appendChild(characterFullName)
+
+    const characterRace = document.createElement('li')
+    characterRace.textContent = `Race: ${this.appearance.race}`
+    characterBio.appendChild(characterRace)
 
     const characterPlaceOfBirth = document.createElement('li')
     characterPlaceOfBirth.textContent = `Place of Birth: ${this.biography.placeOfBirth}`
@@ -156,13 +172,14 @@ function createCharacterCard() {
     characterOccupation.textContent = `Occupation: ${this.work.occupation}`
     characterBio.appendChild(characterOccupation)
 
-    middleCard.appendChild(characterBio)
+    sectionBioandStats.appendChild(characterBio)
 
-    const lowerCard = document.createElement('div')
 
-    const powerStatsLabel = document.createElement('h4')
+
+
+    const powerStatsLabel = document.createElement('li')
     powerStatsLabel.textContent = "POWERSTATS"
-    lowerCard.appendChild(powerStatsLabel)
+    // lowerCard.appendChild(powerStatsLabel)
 
     const characterPowerStats = document.createElement('ul')
 
@@ -190,11 +207,10 @@ function createCharacterCard() {
     characterStrength.textContent = `Strength: ${this.powerstats.strength}`
     characterPowerStats.appendChild(characterStrength)
 
-    const characterRace = document.createElement('p')
-    characterRace.textContent = this.appearance.race
+    sectionBioandStats.appendChild(powerStatsLabel)
+    sectionBioandStats.appendChild(characterPowerStats)
 
-    lowerCard.appendChild(characterPowerStats)
-    lowerCard.appendChild(characterRace)
+    lowerCard.appendChild(sectionBioandStats)
 
     const buttonDiv = document.createElement("div")
     const likeButton = document.createElement("button")
@@ -215,7 +231,7 @@ function populateCards(alphaList) {
         alphaList.forEach(letter => {
             const characterSlugSplit = character.slug.split("-")
             if (characterSlugSplit[1].startsWith(letter.toLowerCase())) {
-                const cardLocation = document.getElementById(letter+"Space")
+                const cardLocation = document.getElementById(letter + "Space")
                 const card = createCharacterCard.call(character)
                 cardLocation.appendChild(card)
             }
