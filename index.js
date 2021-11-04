@@ -85,13 +85,10 @@ function createAlphaSeperators() {
         const letterHeader = document.createElement("h1")
         letterHeader.textContent = letter
         letterHeader.setAttribute("class", "letter-header")
-        // const sperator = document.createElement("hr")
-        // sperator.setAttribute("class", "letter-header")
         const cardSpace = document.createElement("div")
         cardSpace.className = "cardSpace"
         cardSpace.setAttribute("id", letter + "Space")
         div.appendChild(letterHeader)
-        // div.appendChild(sperator)
         div.appendChild(cardSpace)
         heroCards.appendChild(div)
     })
@@ -109,9 +106,9 @@ function createAlphaSelectors() {
 
 function createCharacterCard() {
     const cardDiv = document.createElement("div")
-    if(this.biography.alignment === "good"){
+    if (this.biography.alignment === "good") {
         cardDiv.className = "alignmentGood"
-    }else{
+    } else {
         cardDiv.className = "alignmentBad"
     }
     // cardDiv.setAttribute("class", "characterCard")
@@ -214,9 +211,19 @@ function createCharacterCard() {
     lowerCard.appendChild(sectionBioandStats)
 
     const buttonDiv = document.createElement("div")
+    let buttonStatus = false
     const likeButton = document.createElement("button")
-    likeButton.textContent = "Like"
+    likeButton.textContent = "💓Like"
     likeButton.setAttribute("class", "btn")
+    likeButton.addEventListener("click", () => {
+        if (buttonStatus) {
+            likeButton.style.backgroundColor = "aliceblue"
+            
+        }else{
+            likeButton.style.backgroundColor = "red"
+        }
+        buttonStatus = !buttonStatus
+    })
     buttonDiv.appendChild(likeButton)
 
     cardDiv.appendChild(upperCard)

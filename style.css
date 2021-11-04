@@ -112,4 +112,6 @@ body {
 
 .btn {
     border-radius: 5px;
+    padding: 5px;
+    background-color: aliceblue;
 }
