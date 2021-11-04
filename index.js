@@ -218,8 +218,8 @@ function createCharacterCard() {
     likeButton.addEventListener("click", () => {
         if (buttonStatus) {
             likeButton.style.backgroundColor = "aliceblue"
-            
-        }else{
+
+        } else {
             likeButton.style.backgroundColor = "red"
         }
         buttonStatus = !buttonStatus
@@ -256,6 +256,8 @@ function renderSearchCards() {
     this.forEach(character => {
         const card = createCharacterCard.call(character)
         heroCards.appendChild(card)
+        heroCards.style.flexDirection = "row"
+        heroCards.style.flexWrap = "wrap"
     })
 }
 
