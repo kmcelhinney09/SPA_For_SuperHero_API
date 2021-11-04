@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: monospace;
+    background: linear-gradient(to right top, rgb(26, 132, 231), rgb(187, 24, 24))
+  }
+
+#formContainer{
+    display: "none";
+}
+#hero-cards{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+}
+
+.cardSpace{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.characterCard {
+    border-radius: 10px;
+    background-color: #6186b6;
+    display: flex;
+    flex-direction: column;
+    border: grey solid 1px;
+    padding: 5px;
+    width: 350px;
+    height: auto;
+    margin: 5px;
+    box-shadow: 3px 4px #036cf5
+}
+
+.characterCard > *{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px
+}
+.upperCard{
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.alignment{
+    background-color: black;
+    flex: 1 1 25%;
+    padding: 8px;
+}
+
+.publisher{
+    background-color: black;
+    /* flex: 1 1 25%; */
+    text-align: right;
+    padding: 8px;
+}
+
+
+.characterImage {
+    justify-self: center;
+    height: auto;
+    width: auto;
+}

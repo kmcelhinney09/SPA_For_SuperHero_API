@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         }
     })
-    const formContainer = document.getElementById("container")
+    const formContainer = document.getElementById("formContainer")
     const searchButton = document.getElementById("find-hero")
     searchButton.addEventListener("click", () => {
         searchStatus = !searchStatus
@@ -81,14 +81,19 @@ function createAlphaSeperators() {
     const heroCards = document.getElementById("hero-cards")
     this.map(letter => {
         const div = document.createElement("div")
-        div.setAttribute("id", letter)
+        // div.setAttribute("id", letter)
+        div.className = "letterDiv"
         const letterHeader = document.createElement("h3")
         letterHeader.textContent = letter
         letterHeader.setAttribute("class", "letter-header")
         const sperator = document.createElement("hr")
         sperator.setAttribute("class", "letter-header")
+        const cardSpace = document.createElement("div")
+        cardSpace.className = "cardSpace"
+        cardSpace.setAttribute("id", letter + "Space")
         div.appendChild(letterHeader)
         div.appendChild(sperator)
+        div.appendChild(cardSpace)
         heroCards.appendChild(div)
     })
 
@@ -105,18 +110,23 @@ function createAlphaSelectors() {
 
 function createCharacterCard() {
     const cardDiv = document.createElement("div")
+    cardDiv.setAttribute("class","characterCard")
     const upperCard = document.createElement("div")
+    upperCard.className = "upperCard"
 
     const alignmentElement = document.createElement("h3")
-    alignmentElement.textContent = this.biography.alignment
+    alignmentElement.textContent = this.biography.alignment.toUpperCase()
+    alignmentElement.className = "alignment"
     upperCard.appendChild(alignmentElement)
 
     const publisherElement = document.createElement('h3')
     publisherElement.textContent = this.biography.publisher
+    publisherElement.className = "publisher"
     upperCard.appendChild(publisherElement)
 
     const characterImage = document.createElement('img')
     characterImage.src = this.images.md
+    characterImage.setAttribute("class","characterImage")
     upperCard.appendChild(characterImage)
 
     const middleCard = document.createElement("div")
@@ -186,9 +196,16 @@ function createCharacterCard() {
     lowerCard.appendChild(characterPowerStats)
     lowerCard.appendChild(characterRace)
 
+    const buttonDiv = document.createElement("div")
+    const likeButton = document.createElement("button")
+    likeButton.textContent = "Like"
+    likeButton.setAttribute("class", "btn")
+    buttonDiv.appendChild(likeButton)
+
     cardDiv.appendChild(upperCard)
     cardDiv.appendChild(middleCard)
     cardDiv.appendChild(lowerCard)
+    cardDiv.appendChild(buttonDiv)
 
     return cardDiv
 }
@@ -198,7 +215,7 @@ function populateCards(alphaList) {
         alphaList.forEach(letter => {
             const characterSlugSplit = character.slug.split("-")
             if (characterSlugSplit[1].startsWith(letter.toLowerCase())) {
-                const cardLocation = document.getElementById(letter)
+                const cardLocation = document.getElementById(letter+"Space")
                 const card = createCharacterCard.call(character)
                 cardLocation.appendChild(card)
             }
