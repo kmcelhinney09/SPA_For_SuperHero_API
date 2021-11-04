@@ -1,12 +1,26 @@
 body {
+    margin: 0px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background: linear-gradient(to right top, rgb(26, 132, 231), rgb(187, 24, 24))
+    background: linear-gradient(to right top, rgb(26, 132, 231), rgb(187, 24, 24));
 }
 
 #formContainer {
+    text-align: center;
+    color: aliceblue;
     display: none;
 }
 
+#header{
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.26);
+    padding: 20px;
+    text-align: center;
+}
+.letter-header{
+    background-color: rgba(0, 0, 0, 0.26);
+    text-align: center;
+    color: aliceblue;
+}
 #hero-cards {
     display: flex;
     flex-direction: column;

@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const searchIndex = character.name.toLowerCase().search(search)
                     if (searchIndex > -1) {
                         characterChoice.push(character)
-                        // console.log(character)
                     }
                 })
                 renderSearchCards.call(characterChoice)
@@ -81,18 +80,18 @@ function createAlphaSeperators() {
     const heroCards = document.getElementById("hero-cards")
     this.map(letter => {
         const div = document.createElement("div")
-        // div.setAttribute("id", letter)
+        div.setAttribute("id", letter)
         div.className = "letterDiv"
-        const letterHeader = document.createElement("h3")
+        const letterHeader = document.createElement("h1")
         letterHeader.textContent = letter
         letterHeader.setAttribute("class", "letter-header")
-        const sperator = document.createElement("hr")
-        sperator.setAttribute("class", "letter-header")
+        // const sperator = document.createElement("hr")
+        // sperator.setAttribute("class", "letter-header")
         const cardSpace = document.createElement("div")
         cardSpace.className = "cardSpace"
         cardSpace.setAttribute("id", letter + "Space")
         div.appendChild(letterHeader)
-        div.appendChild(sperator)
+        // div.appendChild(sperator)
         div.appendChild(cardSpace)
         heroCards.appendChild(div)
     })
