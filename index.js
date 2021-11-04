@@ -1,7 +1,7 @@
 let searchStatus = false
 document.addEventListener("DOMContentLoaded", () => {
     loadComicData()
-    document.getElementById("alphabet-dropdown").addEventListener('click', (e) => {
+    document.getElementById("alphabet-dropdown").addEventListener("change", (e) => {
         const filterValue = e.target.value
         if (filterValue === "All") {
             const cardDivsions = document.getElementById("hero-cards").childNodes
