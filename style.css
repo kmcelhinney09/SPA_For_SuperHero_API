@@ -37,9 +37,9 @@ body {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding-left: 25px;
-    padding-right: 25px;
-    width: 400px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 350px;
     height: auto;
 }
 
@@ -98,13 +98,14 @@ body {
 
 .characterImage {
     justify-self: center;
-    width: 100%;
+    width: 350px;
     height: auto;
     border-radius: 10px;
 }
 
 .imageText {
     height: 80%;
+    /* width: 80%; */
     background-color: black;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
