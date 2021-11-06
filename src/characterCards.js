@@ -1,4 +1,4 @@
-function createCharacterCard() {
+function createCharacterCard(liked) {
     const cardDiv = document.createElement("div")
     if (this.biography.alignment === "good") {
         cardDiv.className = "alignmentGood"
@@ -111,13 +111,19 @@ function createCharacterCard() {
     likeButton.setAttribute("class", "btn")
     likeButton.addEventListener("click", () => {
         if (buttonStatus) {
+            removeLiked.call(this.id)
             likeButton.style.backgroundColor = "aliceblue"
 
         } else {
+            addLiked.call(this.id)
             likeButton.style.backgroundColor = "red"
         }
         buttonStatus = !buttonStatus
     })
+    if (liked) {
+        likeButton.style.backgroundColor = "red"
+        buttonStatus = !buttonStatus
+    }
     buttonDiv.appendChild(likeButton)
 
     cardDiv.appendChild(upperCard)
@@ -129,16 +135,27 @@ function createCharacterCard() {
 }
 
 function populateCards(alphaList) {
-    this.map(character => {
-        alphaList.forEach(letter => {
-            const characterSlugSplit = character.slug.split("-")
-            if (characterSlugSplit[1].startsWith(letter.toLowerCase())) {
-                const cardLocation = document.getElementById(letter + "Space")
-                const card = createCharacterCard.call(character)
-                cardLocation.appendChild(card)
-            }
+    fetch("http://localhost:3000/liked")
+        .then(res => res.json())
+        .then(characterID => {
+            characterIDStatus = []
+            characterID.forEach(characterInfo => {
+                characterIDStatus.push(characterInfo.id)
+            })
+            this.map(character => {
+                alphaList.forEach(letter => {
+                    const characterSlugSplit = character.slug.split("-")
+                    let liked = false
+                    if (characterSlugSplit[1].startsWith(letter.toLowerCase())) {
+                        if (characterIDStatus.includes(characterSlugSplit[0])) {
+                            liked = true
+                        }
+                        const cardLocation = document.getElementById(letter + "Space")
+                        const card = createCharacterCard.call(character, liked)
+                        cardLocation.appendChild(card)
+                    }
+                })
+
+            })
         })
-
-
-    })
 }

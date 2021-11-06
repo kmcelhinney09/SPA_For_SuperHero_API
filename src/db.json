@@ -1,8 +1,11 @@
 {
-    "likes":[
-
-    ],
-    "battleGroup":[
-
-    ]
+  "liked": [
+    {
+      "id": "1"
+    },
+    {
+      "id": "2"
+    }
+  ],
+  "battleGroup": []
 }
