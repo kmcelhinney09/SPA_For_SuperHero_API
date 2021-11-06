@@ -105,6 +105,7 @@ function createAlphaSelectors() {
 }
 
 
+
 function clearCards(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
