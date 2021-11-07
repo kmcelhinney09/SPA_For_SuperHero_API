@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (battleGroupBtnStatus) {
             document.getElementById("battle-group-section").style.display = "none"
             battleGroupBtn.textContent = "Show Battle Group"
+            clearCards(document.getElementById("hero-cards"))
             loadComicData()
         } else {
             document.getElementById("battle-group-section").style.display = "flex"
