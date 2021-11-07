@@ -105,12 +105,13 @@ function createCharacterCard(liked) {
     lowerCard.appendChild(sectionBioandStats)
 
     const buttonDiv = document.createElement("div")
-    let buttonStatus = false
+    let likeBtnStatus = false
+    let battleBtnStatus = false
     const likeButton = document.createElement("button")
     likeButton.textContent = "💓Like"
     likeButton.setAttribute("class", "btn")
     likeButton.addEventListener("click", () => {
-        if (buttonStatus) {
+        if (likeBtnStatus) {
             removeLiked.call(this.id)
             likeButton.style.backgroundColor = "aliceblue"
 
@@ -118,13 +119,28 @@ function createCharacterCard(liked) {
             addLiked.call(this.id)
             likeButton.style.backgroundColor = "red"
         }
-        buttonStatus = !buttonStatus
+        likeBtnStatus = !likeBtnStatus
     })
     if (liked) {
         likeButton.style.backgroundColor = "red"
-        buttonStatus = !buttonStatus
+        likeBtnStatus = !likeBtnStatus
     }
+
+    const battleGroupBtn = document.createElement("button")
+    battleGroupBtn.textContent = "Add Battle Group"
+    battleGroupBtn.className = "btn"
+
+    battleGroupBtn.addEventListener("click", () => {
+        if(battleBtnStatus){
+            battleGroupBtn.style.backgroundColor = "aliceblue"
+        }else{
+            battleGroupBtn.style.backgroundColor = "green"
+        }
+
+        battleBtnStatus = !battleBtnStatus
+    })
     buttonDiv.appendChild(likeButton)
+    buttonDiv.appendChild(battleGroupBtn)
 
     cardDiv.appendChild(upperCard)
     cardDiv.appendChild(middleCard)
