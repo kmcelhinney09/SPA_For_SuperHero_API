@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             document.getElementById("battle-group-section").style.display = "flex"
             battleGroupBtn.textContent = "Hide Battle Group"
+            clearCards(document.getElementById("battle-group"))
             fetch("http://localhost:3000/battleGroup")
                 .then(res => res.json())
                 .then(battleGroupData => {

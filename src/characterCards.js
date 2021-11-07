@@ -1,4 +1,4 @@
-function createCharacterCard(liked) {
+function createCharacterCard(liked, inGroup) {
     const cardDiv = document.createElement("div")
     if (this.biography.alignment === "good") {
         cardDiv.className = "alignmentGood"
@@ -131,16 +131,22 @@ function createCharacterCard(liked) {
     battleGroupBtn.className = "btn"
 
     battleGroupBtn.addEventListener("click", () => {
-        if(battleBtnStatus){
+        if (battleBtnStatus) {
             removeFromBattleGroup.call(this)
             battleGroupBtn.style.backgroundColor = "aliceblue"
-        }else{
+            battleGroupBtn.textContent = "Add Battle Group"
+        } else {
             addToBattleGroup.call(this)
             battleGroupBtn.style.backgroundColor = "green"
+            battleGroupBtn.textContent = "Remove Battle Group"
         }
-
         battleBtnStatus = !battleBtnStatus
     })
+    if(inGroup){
+        battleGroupBtn.style.backgroundColor = "green"
+        battleGroupBtn.textContent = "Remove Battle Group"
+        battleBtnStatus = !battleBtnStatus
+    }
     buttonDiv.appendChild(likeButton)
     buttonDiv.appendChild(battleGroupBtn)
 
@@ -156,24 +162,37 @@ function populateCards(alphaList) {
     fetch("http://localhost:3000/liked")
         .then(res => res.json())
         .then(characterID => {
-            characterIDStatus = []
-            characterID.forEach(characterInfo => {
-                characterIDStatus.push(characterInfo.id)
-            })
-            this.map(character => {
-                alphaList.forEach(letter => {
-                    const characterSlugSplit = character.slug.split("-")
-                    let liked = false
-                    if (characterSlugSplit[1].startsWith(letter.toLowerCase())) {
-                        if (characterIDStatus.includes(characterSlugSplit[0])) {
-                            liked = true
-                        }
-                        const cardLocation = document.getElementById(letter + "Space")
-                        const card = createCharacterCard.call(character, liked)
-                        cardLocation.appendChild(card)
-                    }
+            fetch("http://localhost:3000/battleGroup")
+                .then(res => res.json())
+                .then(battleGroupStatus => {
+                    const characterIDStatus = []
+                    const inBattleGroup = []
+                    characterID.forEach(characterInfo => {
+                        characterIDStatus.push(characterInfo.id)
+                    })
+                    battleGroupStatus.forEach(battleGroupInfo => {
+                        inBattleGroup.push(battleGroupInfo.id.toString())
+                    })
+                    this.map(character => {
+                        alphaList.forEach(letter => {
+                            const characterSlugSplit = character.slug.split("-")
+                            let liked = false
+                            let inGroup = false
+                            if (characterSlugSplit[1].startsWith(letter.toLowerCase())) {
+                                if (characterIDStatus.includes(characterSlugSplit[0])) {
+                                    liked = true
+                                }
+                                if(inBattleGroup.includes(characterSlugSplit[0])){
+                                    inGroup = true
+                                }
+                                const cardLocation = document.getElementById(letter + "Space")
+                                const card = createCharacterCard.call(character, liked, inGroup)
+                                cardLocation.appendChild(card)
+                            }
+                        })
+
+                    })
                 })
 
-            })
         })
 }
