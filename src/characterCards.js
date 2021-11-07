@@ -132,8 +132,10 @@ function createCharacterCard(liked) {
 
     battleGroupBtn.addEventListener("click", () => {
         if(battleBtnStatus){
+            removeFromBattleGroup.call(this)
             battleGroupBtn.style.backgroundColor = "aliceblue"
         }else{
+            addToBattleGroup.call(this)
             battleGroupBtn.style.backgroundColor = "green"
         }
 

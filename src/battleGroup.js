@@ -1,6 +1,8 @@
-function addLiked(){
+function addToBattleGroup(){
+    const battleGroup = []
     const updateData = {
-        "id": this.toString()
+        "id": this.id,
+        "character": this
       }
       const patchRequest = {
         method: "POST",
@@ -10,11 +12,14 @@ function addLiked(){
         },
         body: JSON.stringify(updateData)
       }
-      fetch("http://localhost:3000/liked", patchRequest)
+      fetch("http://localhost:3000/battleGroup", patchRequest)
+      battleGroup.push(this)
+      console.log(battleGroup)
 }
 
-function removeLiked(){
-    const fetchURL = "http://localHost:3000/liked/" + this
+
+function removeFromBattleGroup(){
+    const fetchURL = "http://localHost:3000/battleGroup/" + this.id
       const patchRequest = {
         method: "DELETE",
         headers: {
@@ -23,4 +28,8 @@ function removeLiked(){
         }
       }
       fetch(fetchURL, patchRequest)
+}
+
+function renderBattleGroup(){
+
 }
