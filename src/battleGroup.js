@@ -1,5 +1,4 @@
 function addToBattleGroup(){
-    const battleGroup = []
     const updateData = {
         "id": this.id,
         "character": this
@@ -13,8 +12,6 @@ function addToBattleGroup(){
         body: JSON.stringify(updateData)
       }
       fetch("http://localhost:3000/battleGroup", patchRequest)
-      battleGroup.push(this)
-      console.log(battleGroup)
 }
 
 
@@ -30,6 +27,13 @@ function removeFromBattleGroup(){
       fetch(fetchURL, patchRequest)
 }
 
-function renderBattleGroup(){
-
+function renderBattleCards() {
+    const heroCards = document.getElementById("battle-group")
+    clearCards(heroCards)
+    this.forEach(character => {
+        const card = createCharacterCard.call(character)
+        heroCards.appendChild(card)
+        heroCards.style.flexDirection = "row"
+        heroCards.style.flexWrap = "wrap"
+    })
 }

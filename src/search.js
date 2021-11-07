@@ -1,6 +1,5 @@
 
 function renderSearchCards() {
-    console.log(this)
     const heroCards = document.getElementById("hero-cards")
     clearCards(heroCards)
     this.forEach(character => {

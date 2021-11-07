@@ -27,7 +27,24 @@ body {
   display: flex;
   flex-direction: column;
 }
+#battle-group-section{
+  display: none;
+  flex-direction: column;
+}
 
+#battle-group-header{
+  flex-basis: 100%;
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.26);
+  padding: 20px;
+  text-align: center;
+}
+#battle-group{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
 .cardSpace {
   display: flex;
   flex-wrap: wrap;

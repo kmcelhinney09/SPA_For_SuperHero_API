@@ -1,4 +1,5 @@
 let searchStatus = false
+let battleGroupBtnStatus = false
 document.addEventListener("DOMContentLoaded", () => {
     loadComicData()
     document.getElementById("alphabet-dropdown").addEventListener("change", (e) => {
@@ -20,6 +21,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
         }
+    })
+    const battleGroupBtn = document.getElementById("battle-group-btn")
+    battleGroupBtn.addEventListener("click", () => {
+        if (battleGroupBtnStatus) {
+            document.getElementById("battle-group-section").style.display = "none"
+            battleGroupBtn.textContent = "Show Battle Group"
+            loadComicData()
+        } else {
+            document.getElementById("battle-group-section").style.display = "flex"
+            battleGroupBtn.textContent = "Hide Battle Group"
+            fetch("http://localhost:3000/battleGroup")
+                .then(res => res.json())
+                .then(battleGroupData => {
+                    const battleGroup = []
+                    battleGroupData.forEach(characterData => {
+                        battleGroup.push(characterData.character)
+                    })
+                    renderBattleCards.call(battleGroup)
+                })
+        }
+        battleGroupBtnStatus = !battleGroupBtnStatus
     })
     const formContainer = document.getElementById("formContainer")
     const searchButton = document.getElementById("find-hero")
